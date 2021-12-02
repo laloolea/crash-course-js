@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Google Map</title>
+
+    <style>
+        #map{
+            height:400px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Google Map</h1>
+    <div id="map"></div>
+
+
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6jfr8LFI5n2WarnvWzRinp2RkxA7gMEA&callback=initMap">
+</script>
+
+<script>
+    function initMap(){
+        //Map options
+        var options = {
+            zoom:8,
+            center:{lat:29.0730,lng:-110.9559}
+        }
+        //creation of the map
+        var map = new google.maps.Map(document.getElementById('map'),options);
+
+        // Listenfor click on map
+        google.maps.event.addListener(map,'click',function(event){
+            //Add marker
+            addMarker({coords:event.latLng});
+        });
+        
+        // //Add marker
+        // var marker = new google.maps.Marker({
+        //     position:{lat:29.0605,lng:110.9752},
+        //     map:map,
+        //     icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        // });
+
+        // var infoWindow = new google.maps.infoWindow({
+        //     content:'<h1> Nacameri</h1>'
+        // })
+
+        // marker.addListener('click',function(){
+        //     infoWindow.open(map,marker);
+        // });
+        var markers = [
+            {
+                coords:{lat:29.0605,lng:-110.9752},
+                iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                content:'<h1>Nacameri</h1>'
+            },
+            {
+                coords:{lat:29.0602,lng:-110.9743},
+                iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            }
+
+        ];
+
+
+        //loop through markers
+        for(var i = 0 ; i < markers.length; i++){
+            addMarker(markers[i]);
+        }
+     
+        //Add marker function
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+             position:props.coords,
+             map:map,
+                //icon:props.iconImage
+            });
+            //Check for customicon
+            if(props.iconImage){
+                //set icon image
+                marker.setIcon(props.iconImage);
+            }
+
+            //Check content
+            if(props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                    content:props.contents
+                });
+
+                marker.addListener('click',function(){
+                    infoWindow.open(map,marker);
+                });
+            }   
+        }
+    }
+</script>
+
+
+</body>
+</html>

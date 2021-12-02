@@ -230,13 +230,13 @@ var select = document.querySelector('select');
 
 
 // select.addEventListener('change',runEvent);
-//// select.addEventListener('input',runEvent);
+// select.addEventListener('input',runEvent);
 
 form.addEventListener('submit',runEvent);
 
 function runEvent(e){
     //e.preventDefault();
-    console.log('EVENT type: ' + e.type);
+    //console.log('EVENT type: ' + e.type);
     //console.log(e.target.value);
 
     //output.innerHTML="<h1>No copies</h1>"
